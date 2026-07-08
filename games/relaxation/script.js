@@ -128,7 +128,6 @@
     fallingItems.forEach((item) => item.el.remove());
     fallingItems = [];
   }
-
   function triggerRelaxation() {
     isPaused = true;
     stopSpawning();
@@ -137,7 +136,17 @@
     const exercise = RELAX_EXERCISES[Math.floor(Math.random() * RELAX_EXERCISES.length)];
     relaxTitleEl.textContent = exercise.title;
     relaxTextEl.textContent = exercise.text;
+
+    // hide button first
+    relaxDoneBtn.hidden = true;
+
+    // show overlay
     relaxOverlay.hidden = false;
+
+    // show button after 10 seconds
+    setTimeout(() => {
+      relaxDoneBtn.hidden = false;
+    }, 7500);
   }
 
   relaxDoneBtn.addEventListener('click', () => {
