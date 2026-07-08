@@ -23,6 +23,8 @@
 
   const FRUIT_TYPES = ['apple', 'banana', 'grape'];
 
+  const playBtn = document.getElementById('play-btn');
+  const startOverlay = document.getElementById('start-overlay');
 
   // Short, original calm-down scripts. One is picked at random each time
   // a sparkle is caught. Feel free to edit the wording to match your voice.
@@ -41,10 +43,9 @@
     },
   ];
 
+  let gameStarted = false;
+
   let basketX = 0;
-  let leftPressed = false;
-  let rightPressed = false;
-  const KEY_SPEED = 6;
 
   let fruitCount = 0;
   let sparkleCount = 0;
@@ -68,20 +69,17 @@
     setBasketX(clientX - rect.left - BASKET_WIDTH / 2);
   }
 
-  stage.addEventListener('mousemove', (e) => handlePointerMove(e.clientX));
+  stage.addEventListener('mousemove', (e) => {
+  if (!isPaused && gameStarted) {
+    handlePointerMove(e.clientX);
+  }
+  });
+
   stage.addEventListener('touchmove', (e) => {
     if (e.touches[0]) handlePointerMove(e.touches[0].clientX);
     e.preventDefault();
   }, { passive: false });
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') leftPressed = true;
-    if (e.key === 'ArrowRight') rightPressed = true;
-  });
-  document.addEventListener('keyup', (e) => {
-    if (e.key === 'ArrowLeft') leftPressed = false;
-    if (e.key === 'ArrowRight') rightPressed = false;
-  });
 
   function spawnItem() {
     if (isPaused) return;
@@ -157,9 +155,6 @@
 
   function gameLoop() {
     if (!isPaused) {
-      if (leftPressed) setBasketX(basketX - KEY_SPEED);
-      if (rightPressed) setBasketX(basketX + KEY_SPEED);
-
       const stageHeight = stage.clientHeight;
       const basketRect = {
         left: basketX,
@@ -206,11 +201,16 @@
     requestAnimationFrame(gameLoop);
   }
 
-  window.addEventListener('load', () => {
-    initBasket();
-    startSpawning();
-    requestAnimationFrame(gameLoop);
-  });
+window.addEventListener('load', () => {
+  initBasket();
+  requestAnimationFrame(gameLoop);
+});
+
+playBtn.addEventListener('click', () => {
+  gameStarted = true;
+  startOverlay.style.display = 'none';
+  startSpawning();
+});
 
   window.addEventListener('resize', () => {
     setBasketX(basketX);

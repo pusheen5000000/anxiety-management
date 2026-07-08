@@ -68,7 +68,43 @@
   background-repeat: no-repeat;
   touch-action: none;
   cursor: pointer;
+  
 }
+/* ===== Start Screen ===== */
+.start-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(45, 120, 90, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.play-btn {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+
+  color: var(--white);
+  background: var(--teal-deep);
+
+  border: 3px solid var(--white);
+  border-radius: var(--radius-md);
+
+  padding: 14px 30px;
+  cursor: pointer;
+
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.15s ease;
+}
+
+.play-btn:hover,
+.play-btn:focus-visible {
+  transform: translateY(-3px);
+  outline: none;
+}
+
 
 .game-hint {
   text-align: center;
