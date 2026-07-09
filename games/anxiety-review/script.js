@@ -17,6 +17,11 @@
     { clue: 'Thoughts, Feelings, and Actions, all connected together.', correct: 'The Anxiety Triad' },
   ];
 
+  const playBtn = document.getElementById("play-btn");
+  const startOverlay = document.getElementById("start-overlay");
+
+  let gameStarted = false;
+
   const FISH_IMAGES = [
   "images/fish1.png",
   "images/fish2.png",
@@ -202,8 +207,14 @@ function setSprite(state) {
   optionB.addEventListener('click', () => handleOptionClick(optionB, optionA));
 
   personBtn.addEventListener('click', () => {
+    if (!gameStarted) return;
     if (personBtn.classList.contains('disabled')) return;
+
     startFishing();
+  });
+  playBtn.addEventListener("click", () => {
+  gameStarted = true;
+  startOverlay.style.display = "none";
   });
 
   updateProgressText();
