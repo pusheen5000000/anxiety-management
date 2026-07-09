@@ -62,6 +62,10 @@
 
   let pettingMode = false;
   let encourageTimer = null;
+  let gameStarted = false;
+
+  const playBtn = document.getElementById('play-btn');
+  const startOverlay = document.getElementById('start-overlay');
 
   let currentIndex = 0; // index of the active (unlocked, unsolved) bubble
   let bubbles = [];
@@ -78,6 +82,7 @@
       btn.appendChild(icon);
 
       btn.addEventListener('click', () => {
+        if (!gameStarted) return;
         if (btn.classList.contains('locked') || btn.classList.contains('solved')) return;
         openQuiz(i);
       });
@@ -243,6 +248,11 @@
     strategiesList.hidden = false;
     petKittyBtn.hidden = false;
     finishMessage.textContent = 'Strategies for Thinking Errors';
+  });
+
+  playBtn.addEventListener('click', () => {
+    gameStarted = true;
+    startOverlay.style.display = 'none';
   });
 
   buildBubbles();
