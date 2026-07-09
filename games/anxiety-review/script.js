@@ -32,11 +32,10 @@
   const fishIcon = document.getElementById("fish-icon");
   let currentFish = "";
   const caughtFishContainer = document.getElementById('caught-fish-container');
-  const ENCOURAGEMENTS = ['Great catch!', 'Nice work!', 'You\u2019re on a roll!', 'Keep it up!'];
+  const ENCOURAGEMENTS = ['You caught a fish! Great catch!', 'You caught a fish! Nice work!', 'You caught a fish! You\u2019re on a roll!', 'You caught a fish! Keep it up!'];
 
   const MIN_BITE_DELAY = 1800; // ms before a question pops up
   const MAX_BITE_DELAY = 3600;
-  const RESULT_DISPLAY_TIME = 1500; // ms the correct/incorrect message stays up
 
   const progressText = document.getElementById('progress-text');
   const encourageText = document.getElementById('encourage-text');
@@ -184,7 +183,6 @@ function setSprite(state) {
 
     if (isCorrect) {
       chosenBtn.classList.add('correct');
-      quizFeedback.textContent = 'You caught a fish! \u{1F3A3}\u{1F41F}';
       quizFeedback.classList.add('success');
       quizFeedback.hidden = false;
       
@@ -200,7 +198,11 @@ function setSprite(state) {
       quizFeedback.hidden = false;
     }
 
-    setTimeout(closeQuizAndReset, RESULT_DISPLAY_TIME);
+    if (isCorrect) {
+      setTimeout(closeQuizAndReset, 0); // correct answer disappears faster
+    } else {
+      setTimeout(closeQuizAndReset, 1500); // wrong answer stays longer
+    }
   }
 
   optionA.addEventListener('click', () => handleOptionClick(optionA, optionB));
