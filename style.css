@@ -273,3 +273,29 @@ h1, h2, h3 {
   padding: 3px 10px;
   box-shadow: 0 4px 10px rgba(62, 142, 130, 0.12);
 }
+
+/* ===== Anxiety Review background ===== */
+.anxiety-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.anxiety-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image: url("images/bunny.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  opacity: 0.67;
+  z-index: 0;
+}
+
+/* Keep text above bunny background */
+.anxiety-card > * {
+  position: relative;
+  z-index: 1;
+}

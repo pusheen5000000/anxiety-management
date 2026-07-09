@@ -1,9 +1,4 @@
-/* ===== Breathing Basket Catch — game logic =====
-   Drop your own PNGs into games/images/ named:
-     basket.png, apple.png, banana.png, grape.png, sparkle.png
-   If a PNG isn't found yet, a friendly emoji fallback is shown instead,
-   so the game works right away and upgrades automatically once you add art.
-*/
+
 
 (() => {
   const stage = document.getElementById('game-stage');
@@ -19,7 +14,7 @@
   const BASKET_WIDTH = 90;
   const ITEM_WIDTH = 50;
   const SPAWN_INTERVAL_MS = 1100;
-  const SPARKLE_CHANCE = 0.1;
+  const SPARKLE_CHANCE = 0.25;
 
   const FRUIT_TYPES = ['apple', 'banana', 'grape'];
 
